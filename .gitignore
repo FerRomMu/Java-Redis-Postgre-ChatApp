@@ -25,10 +25,8 @@ hs_err_pid*
 # Gradle build files
 build/
 .gradle/
-
-HELP.md
-.gradle
-build/
+gradlew
+gradlew.bat
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
