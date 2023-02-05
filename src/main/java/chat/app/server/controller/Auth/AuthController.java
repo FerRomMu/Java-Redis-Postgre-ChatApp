@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
+//@RequestMapping("/login")
 public class AuthController {
 
   @Autowired
@@ -22,7 +22,7 @@ public class AuthController {
    * @param AuthenticationRequest la información de login.
    * @return AuthenticationResponse la token de autenticación del usuario
    */
-  @PostMapping("/signin")
+  @PostMapping("/login/signin")
   public ResponseEntity<AuthenticationResponse> authenticate(
           @RequestBody AuthenticationRequest request
   ) {
@@ -34,7 +34,7 @@ public class AuthController {
    * @param RegisterRequest la información de registro.
    * @return AuthenticationResponse la token de autenticación del usuario
    */
-  @PostMapping("/signup")
+  @PostMapping("/login/signup")
   public ResponseEntity<AuthenticationResponse> register(
           @RequestBody RegisterRequest request
   ) {
