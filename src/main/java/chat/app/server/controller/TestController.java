@@ -15,6 +15,6 @@ public class TestController {
   public String pong() { return "Pong (estes o no logueado)"; }
 
   @GetMapping("/auth")
-  public String test(Authentication authentication) { return "Estas autentificado." + authentication.getName(); }
+  public String test(Authentication authentication) { return authentication.getName(); }
 
 }
