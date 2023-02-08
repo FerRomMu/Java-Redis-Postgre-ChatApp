@@ -1,5 +1,8 @@
 package chat.app.server.controller.Auth;
 
+import chat.app.server.Exceptions.EmailInUseException;
+import chat.app.server.Exceptions.MobileInUseException;
+import chat.app.server.Exceptions.UserInUseException;
 import chat.app.server.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/login")
+@RequestMapping("/login")
 public class AuthController {
 
   @Autowired
@@ -22,7 +25,7 @@ public class AuthController {
    * @param AuthenticationRequest la información de login.
    * @return AuthenticationResponse la token de autenticación del usuario
    */
-  @PostMapping("/login/signin")
+  @PostMapping("/signin")
   public ResponseEntity<AuthenticationResponse> authenticate(
           @RequestBody AuthenticationRequest request
   ) {
@@ -34,11 +37,25 @@ public class AuthController {
    * @param RegisterRequest la información de registro.
    * @return AuthenticationResponse la token de autenticación del usuario
    */
-  @PostMapping("/login/signup")
+  @PostMapping("/signup")
   public ResponseEntity<AuthenticationResponse> register(
           @RequestBody RegisterRequest request
   ) {
-    return ResponseEntity.ok(service.register(request));
+
+    if (request.getEmail() == null || request.getPassword() == null
+            || request.getUsername() == null || request.getMobile() < 1000000000) {
+      return ResponseEntity.badRequest().body(new AuthenticationResponse("Username, email, password and mobile are needed."));
+    }
+
+    try {
+      return ResponseEntity.ok(service.register(request));
+    } catch (UserInUseException e) {
+      return ResponseEntity.badRequest().body(new AuthenticationResponse("Username already in use"));
+    } catch (EmailInUseException e) {
+      return ResponseEntity.badRequest().body(new AuthenticationResponse("Email already in use"));
+    } catch (MobileInUseException e) {
+      return ResponseEntity.badRequest().body(new AuthenticationResponse("Mobile already in use"));
+    }
   }
 
 }
