@@ -57,5 +57,4 @@ public class AuthController {
       return ResponseEntity.badRequest().body(new AuthenticationResponse("Mobile already in use"));
     }
   }
-
 }

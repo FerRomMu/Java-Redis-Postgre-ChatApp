@@ -1,4 +1,4 @@
-package chat.app.server.security;
+package chat.app.server.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
