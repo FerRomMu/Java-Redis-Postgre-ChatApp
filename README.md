@@ -21,7 +21,7 @@ docker-compose up
 Now you have postgreSQL on localhost:5432 and pgAdmin on localhost:5050.
 
 ### Connect database with pgAdmin
-Go to localhost:5050 and create a server to connect the database. Name it 'jwt_security' for consistency with the application's configuration, for the credentials use "username: username" and "password: password".
+Go to localhost:5050 and create a server to connect the database. Name it 'chatapp' for consistency with the application's configuration, for the credentials use "username: username" and "password: password".
 
 ### Run project (Api)
 Now you can run the project with an IDE or use gradle:
